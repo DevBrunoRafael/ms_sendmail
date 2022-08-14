@@ -1,12 +1,12 @@
 package com.devbrunorafael.microservice_sendmail.api.controllers;
 
 import com.devbrunorafael.microservice_sendmail.api.dto.inputs.EmailInput;
+import com.devbrunorafael.microservice_sendmail.api.dto.outputs.EmailOutput;
+import com.devbrunorafael.microservice_sendmail.api.mapper.EntityMapper;
 import com.devbrunorafael.microservice_sendmail.domain.model.Email;
 import com.devbrunorafael.microservice_sendmail.domain.service.EmailService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -17,13 +17,14 @@ import javax.validation.Valid;
 public class EmailController {
 
     private EmailService emailService;
+    private EntityMapper entityMapper;
 
     @PostMapping("/sendmail")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Email> sendMail(@RequestBody @Valid EmailInput emailInput){
-        Email email = new Email();
-        BeanUtils.copyProperties(emailInput, email);
-        return null;
+    public EmailOutput sendMail(@Valid @RequestBody EmailInput emailInput){
+        Email email = entityMapper.toConvert(emailInput);
+        Email emailSent = emailService.sendMail(email);
+        return entityMapper.toConvert(emailSent);
     }
 
 }
