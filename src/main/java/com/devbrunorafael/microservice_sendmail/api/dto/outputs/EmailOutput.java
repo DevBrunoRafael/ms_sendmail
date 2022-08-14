@@ -1,7 +1,19 @@
 package com.devbrunorafael.microservice_sendmail.api.dto.outputs;
 
-import lombok.Data;
+import com.devbrunorafael.microservice_sendmail.domain.enums.ShippingStatus;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+import java.time.LocalDateTime;
+
+@Getter
+@Setter
 public class EmailOutput {
+
+    private String emailFrom;
+    private String emailTo;
+    private String subject;
+    private String text;
+    private ShippingStatus status;
+
 }

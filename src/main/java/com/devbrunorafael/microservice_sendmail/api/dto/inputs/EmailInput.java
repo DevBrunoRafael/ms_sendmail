@@ -21,6 +21,6 @@ public class EmailInput {
     @NotBlank
     private String subject;
     @NotBlank
-    private String message;
+    private String text;
 
 }
