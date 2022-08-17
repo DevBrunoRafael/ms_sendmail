@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 @Setter
 public class EmailOutput {
 
-    private String emailFrom;
     private String emailTo;
     private String subject;
     private String text;
